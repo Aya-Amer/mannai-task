@@ -1,0 +1,38 @@
+::ng-deep .p-datatable-thead tr th:last-child{ 
+        text-align: center; 
+}
+::ng-deep .responsive-table {
+@media screen and (max-width: 767px) {
+   
+        .p-datatable-thead {
+            display: none;
+        }
+        .p-datatable-tbody > tr {
+            display: block;
+            border-bottom: 2px solid var(--surface-d);
+            margin-bottom: 1rem;
+        }
+        .p-datatable-tbody > tr > td {
+            display: block;
+            text-align: right; 
+            padding-left: 50%; 
+            position: relative;
+            border: none;
+            width: 100% !important
+        }
+
+        p-datatable-tbody > tr > td::before {
+            content: attr(data-label); 
+            position: absolute;
+            left: 1rem; 
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .p-datatable-tbody > tr > td[data-label="Actions"] > div {
+            justify-content: flex-end;
+        }
+    }
+}

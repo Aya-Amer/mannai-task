@@ -1,0 +1,218 @@
+<p-toolbar class="mb-6">
+    <ng-template #start>
+        <p-button label="New" icon="pi pi-plus" class="mr-2" (onClick)="openNew()" />
+    </ng-template>
+</p-toolbar>
+<div class="card">
+    <p-toast />
+    <p-table 
+        #dt
+        [value]="users()" 
+        dataKey="id" editMode="row" 
+        [rowHover]="true"
+        [rows]="6"
+        styleClass="responsive-table"
+        [showCurrentPageReport]="true"
+        [loading]="loading()"
+        [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+        [filterDelay]="0"
+        [globalFilterFields]="['first_name', 'last_name', 'email']">
+        <ng-template #caption>
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                <p-button [outlined]="true" icon="pi pi-filter-slash" label="Clear" (click)="clear(dt)" />
+                <p-iconField iconPosition="left">
+                    <p-inputIcon>
+                        <i class="pi pi-search"></i>
+                    </p-inputIcon>
+                    <input pInputText type="text" [(ngModel)]="searchValue" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Keyboard Search" />
+                </p-iconField>
+            </div>
+        </ng-template>
+        <ng-template #header>
+            <tr>
+                <th >Avatar</th>
+                <th >Full Name</th>
+                <th >Email</th>
+                <th >Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-user let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="user">
+                <td data-label="Avatar">
+                    <p-cellEditor>
+                        <ng-template #input>
+                            <p-fileUpload 
+                                mode="basic" 
+                                name="avatarUpload" 
+                                accept="image/*" 
+                                [maxFileSize]="1000000" 
+                                (onSelect)="onImageUpload($event, user)"
+                                chooseLabel="Import Image"
+                                [auto]="true">
+                            </p-fileUpload>
+                        </ng-template>
+                        <ng-template #output>
+                            <img
+                            [src]="user.avatar"
+                            [alt]="user.first_name"
+                            class="w-24 rounded"/>
+                        </ng-template>                       
+                    </p-cellEditor>
+                </td>
+                <td data-label="Full Name">
+                    <p-cellEditor>
+                        <ng-template #input>
+                            <div class="flex flex-col gap-2">
+                                <input
+                                    pInputText
+                                    type="text"
+                                    placeholder="First Name"
+                                    [(ngModel)]="user.first_name"  
+                                    required />
+                                <input
+                                    pInputText
+                                    type="text"
+                                    placeholder="Last Name"
+                                    [(ngModel)]="user.last_name"  
+                                    required />
+                            </div>
+                        </ng-template>
+                        <ng-template #output>
+                            {{user.first_name}} {{user.last_name}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td data-label="Email">
+                    <p-cellEditor>
+                        <ng-template #input>
+                                <input
+                                pInputText type="text"
+                                [(ngModel)]="user.email"
+                                required />
+                        </ng-template>
+                        <ng-template #output>
+                                {{user.email}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td data-label="Actions">
+                    <div class="flex items-center justify-center gap-2">
+                        @if(!editing){
+                            <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-eye"
+                            (click)="viewUser(user)"
+                            text
+                            rounded
+                            severity="secondary"
+                            pTooltip="View Details" 
+                            tooltipPosition="top">
+                        </button>
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            pInitEditableRow
+                            icon="pi pi-pencil"
+                            (click)="onRowEditInit(user)"
+                            text
+                            rounded
+                            severity="secondary">
+                        </button>
+                        }
+                       @else {
+                        <button
+                        pButton
+                        pRipple
+                        type="button"
+                        pSaveEditableRow
+                        icon="pi pi-check"
+                        (click)="onRowEditSave(user, ri)"
+                        text
+                        rounded
+                        severity="secondary">
+                    </button>
+                    <button
+                        pButton
+                        pRipple
+                        type="button"
+                        pCancelEditableRow
+                        icon="pi pi-times"
+                        (click)="onRowEditCancel(user, ri)"
+                        text
+                        rounded
+                        severity="secondary">
+                    </button>
+                       }
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-dialog  [visible]="userDialog()" 
+(visibleChange)="userDialog.set($event)"
+ [style]="{ width: '450px' }" header="User Details" [modal]="true">
+   
+    <ng-template pTemplate="content">
+        <form #userForm="ngForm">
+        <div class="flex flex-col gap-6">
+            <div class="flex justify-between items-center gap-4">
+                <p-fileUpload 
+                    mode="basic" 
+                    name="avatarUpload" 
+                    accept="image/*" 
+                    [maxFileSize]="1000000" 
+                    (onSelect)="onImageUpload($event)"
+                    chooseLabel="Choose Image"
+                    [auto]="true"
+                    >
+                </p-fileUpload>
+                @if(user.avatar){
+                    <img 
+                    [src]="user.avatar" 
+                    [alt]="user.first_name || 'User Avatar'" 
+                    class="w-24 h-24 object-cover shadow-md" />
+                }
+                
+            </div>
+            <div>
+                <label for="name" class="block font-bold mb-3">First Name</label>
+                <input type="text" pInputText id="name" [(ngModel)]="user.first_name" name="first_name"
+                 required autofocus fluid />
+                 @if(submitted() && !user.first_name){
+                    <small class="text-red-500">Name is required.</small>
+                 }
+               
+            </div>
+            <div>
+                <label for="last_name" class="block font-bold mb-3">Last Name</label>
+                <input type="text" pInputText id="last_name" [(ngModel)]="user.last_name" name="last_name"
+                 required fluid />
+                 @if(submitted() && !user.last_name){
+                    <small class="text-red-500" >Name is required.</small>
+                 }
+            </div>
+            <div>
+                <label for="email" class="block font-bold mb-3">Email</label>
+                <input type="email" pInputText id="email" [(ngModel)]="user.email" name="email"
+                required fluid/>
+                @if(submitted() && !user.email){
+                    <small class="text-red-500">Email is required.</small>
+                }
+                
+            </div>
+        </div>
+    </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+        <p-button label="Save" icon="pi pi-check" (click)="saveUser()"  [loading]="isSaving()"/>
+    </ng-template>
+
+</p-dialog>

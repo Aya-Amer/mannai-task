@@ -1,59 +1,96 @@
-# MannaiTask
+# User Management Dashboard (MannaiTask)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.6.
+A modern and responsive user management application built with Angular and PrimeNG. This project demonstrates a complete CRUD (Create, Read, Update, Delete) interface for managing a list of users.
 
-## Development server
+ 
+*(To add a screenshot: take a picture of your running application, upload it to a site like [Imgur](https://imgur.com/upload), and paste the link here.)*
 
-To start a local development server, run:
+## About The Project
 
-```bash
-ng serve
-```
+This application was created as a technical task to showcase modern front-end development practices. It provides a clean and intuitive table-based interface where users can be viewed, searched, created, and edited directly in place. All operations are designed to be seamless and user-friendly, utilizing the powerful component library of PrimeNG.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Features
 
-## Code scaffolding
+*   **View & Paginate:** Displays a list of all users fetched from a live API.
+*   **Search:** Instantly filter users by name or email using a global search bar.
+*   **Create Users:** Add new users through a clean and validated dialog form.
+*   **Inline Editing:** Edit a user's name and email directly within the table without leaving the page.
+*   **Image Upload:** Update a user's avatar with a live preview by uploading a new image.
+*   **View Details:** See a user's full details in a pop-up modal.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Built With
 
-```bash
-ng generate component component-name
-```
+This project was built using these key technologies:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+*   [![Angular][Angular.io]][Angular-url]
+*   [![PrimeNG][PrimeNG.org]][PrimeNG-url]
+*   [![Tailwind CSS][TailwindCSS.com]][TailwindCSS-url]
 
-```bash
-ng generate --help
-```
+## Getting Started
 
-## Building
+To get a local copy up and running, follow these simple steps.
 
-To build the project run:
+### Prerequisites
 
-```bash
-ng build
-```
+Make sure you have Node.js and npm (Node Package Manager) installed on your machine.
+*   You can download them from [nodejs.org](https://nodejs.org/).
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Installation & Running the App
 
-## Running unit tests
+1.  **Clone the repository** to your local machine:
+    ```sh
+    git clone https://github.com/your-username/MannaiTask.git
+    ```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+2.  **Navigate into the project directory**:
+    ```sh
+    cd MannaiTask
+    ```
 
-```bash
-ng test
-```
+3.  **Install NPM modules**:
+    ```sh
+    npm install
+    ```
 
-## Running end-to-end tests
+4.  **Run the project**:
+    ```sh
+    npm start
+    ```
+    This will start the development server. Open your browser and go to `http://localhost:4200/` to see the application running.
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
+<details>
+  <summary><strong>Advanced Angular CLI Commands</strong></summary>
+  
+  ### Code scaffolding
+  
+  Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+  
+  ### Building
+  
+  Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+  
+  ### Running unit tests
+  
+  Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+</details>
 
-## Additional Resources
+## License
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+## Contact
+
+Your Name - [your-email@example.com](mailto:your-email@example.com)
+
+Project Link: [https://github.com/your-username/MannaiTask](https://github.com/your-username/MannaiTask)
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+[Angular-url]: https://angular.io/
+[PrimeNG.org]: https://img.shields.io/badge/PrimeNG-2196F3?style=for-the-badge&logo=prime&logoColor=white
+[PrimeNG-url]: https://primeng.org/
+[TailwindCSS.com]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
+[TailwindCSS-url]: https://tailwindcss.com/
