@@ -39,7 +39,7 @@ Make sure you have Node.js and npm (Node Package Manager) installed on your mach
 
 1.  **Clone the repository** to your local machine:
     ```sh
-    git clone https://github.com/your-username/MannaiTask.git
+    git clone https://github.com/Aya-Amer/mannai-task.git
     ```
 
 2.  **Navigate into the project directory**:
@@ -83,9 +83,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Your Name - [your-email@example.com](mailto:your-email@example.com)
+Your Name - [your-email@example.com](mailto:ayaamer694@gmail.com)
 
-Project Link: [https://github.com/your-username/MannaiTask](https://github.com/your-username/MannaiTask)
+Project Link: [https://github.com/your-username/MannaiTask](https://github.com/Aya-Amer/mannai-task)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
